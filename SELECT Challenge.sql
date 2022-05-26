@@ -14,3 +14,33 @@ FROM OCCUPATIONS ORDER BY NAME asc;
 SELECT concat('There are a total of ',count(*),' ',lower(occupation),(if(count(*)>1,'s','')),'.' )
 from OCCUPATIONS group by OCCUPATION order by count(occupation) asc;
 
+
+
+
+  
+# Occupations  
+  
+--Pivot the Occupation column in OCCUPATIONS so that each Name is sorted alphabetically and displayed underneath its corresponding Occupation. The output column headers should be Doctor, Professor, Singer, and Actor, respectively.  
+  
+--***Note:*** Print NULL when there are no more names corresponding to an occupation.  
+
+
+SELECT
+    Doctor,
+    Professor,
+    Singer,
+    Actor
+FROM
+    (SELECT 
+         ROW_NUMBER() OVER (PARTITION BY Occupation ORDER BY Name) R_N,
+         Name,
+         Occupation 
+     FROM 
+         Occupations
+    ) AS source 
+PIVOT
+(
+max(Name) FOR occupation IN (Doctor,Professor,Singer,Actor) 
+)as pvt
+ORDER BY R_N
+
