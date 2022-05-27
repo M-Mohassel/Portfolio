@@ -44,3 +44,14 @@ max(Name) FOR occupation IN (Doctor,Professor,Singer,Actor)
 )as pvt
 ORDER BY R_N
 
+#Binary Tree Nodes
+--You are given a table, BST, containing two columns: N and P, where N represents the value of a node in Binary Tree, and P is the parent of N.
+
+SELECT N,
+CASE
+   WHEN P IS NULL THEN 'Root'
+   WHEN (SELECT COUNT(*) FROM BST WHERE B.N=P)>0 THEN 'Inner'
+   ELSE 'Leaf'
+END AS PLACE
+FROM BST as B
+ORDER BY N;
