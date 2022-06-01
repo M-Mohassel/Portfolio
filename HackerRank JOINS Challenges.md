@@ -10,7 +10,7 @@ if the grade is lower than 8, use "NULL" as their name and list them by their gr
 with the same grade (1-7) assigned to them, order those particular students by their marks in ascending order.
 
 
-### My solution
+### My solution:
 
 `SELECT
     CASE WHEN Grades.Grade < 8 THEN NULL ELSE stu.Name END AS Name,
@@ -35,7 +35,7 @@ ascending hacker_id.
 
 
 
-### My solution
+### My solution:
 `select h.hacker_id, h.name from Submissions s join Hackers h 
 on s.hacker_id = h.hacker_id 
 join Challenges c on s.challenge_id = c.challenge_id
