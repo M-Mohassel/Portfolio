@@ -112,13 +112,11 @@ RollingPeopleVaccinated numeric
 `Insert into #PercentPopulationVaccinated
 Select death.continent, death.location , death.date , death.population,vac.new_vaccinations
 , SUM(CONVERT(bigint,vac.new_vaccinations)) OVER (Partition by death.Location Order by death.location, CONVERT (DATE,death.date)) as RollingPeopleVaccinated
-
 FROM [Portfolio Project Covid]..CovidDeath death
 JOIN [Portfolio Project Covid]..CovidVac vac
 	On death.location = vac.location
-	and death.date = vac.date`
-
-`Select *, (RollingPeopleVaccinated/Population)*100
+	and death.date = vac.date
+Select *, (RollingPeopleVaccinated/Population)*100
 From #PercentPopulationVaccinated`
 
 
